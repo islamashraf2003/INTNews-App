@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:int_news/core/helper/spacing.dart';
+import 'package:int_news/core/theming/colors.dart';
+import 'package:int_news/core/theming/font_weight.dart';
+import 'package:int_news/features/home/ui/widgets/all_news_list/recommendations_see_all.dart';
 
 class AllNewsList extends StatelessWidget {
   const AllNewsList({super.key});
@@ -7,69 +11,106 @@ class AllNewsList extends StatelessWidget {
     {
       "title": "INTCORE announces Q4 results",
       "subtitle": "The company reports a record growth in Q4 2025",
-      "image": "https://via.placeholder.com/100",
+      "image": "assets/images/news.jpg",
     },
     {
       "title": "New mobile app released",
       "subtitle": "INTNEWS app now available for employees worldwide",
-      "image": "https://via.placeholder.com/100",
+      "image": "assets/images/news.jpg",
     },
     {
       "title": "Office reopening post pandemic",
       "subtitle": "All employees are requested to follow new guidelines",
-      "image": "https://via.placeholder.com/100",
+      "image": "assets/images/news.jpg",
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      itemCount: allNews.length,
-      separatorBuilder: (context, index) => const SizedBox(height: 12),
-      itemBuilder: (context, index) {
-        final news = allNews[index];
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 6,
-                offset: const Offset(0, 2),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RecommendationsSeeAll(),
+        verticalSpacing(16),
+        ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: allNews.length,
+          separatorBuilder: (context, index) => const SizedBox(height: 16),
+          itemBuilder: (context, index) {
+            final news = allNews[index];
+            return InkWell(
+              onTap: () {},
+              child: Container(
+                decoration: BoxDecoration(
+                  color: ColorsManager.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorsManager.black.withOpacity(0.08),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          bottomLeft: Radius.circular(16),
+                        ),
+                        image: DecorationImage(
+                          image: AssetImage(news['image']!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    horizontalSpacing(16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            news['title']!,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeightManager.bold,
+                              color: ColorsManager.black,
+                            ),
+                          ),
+                          verticalSpacing(6),
+                          Text(
+                            news['subtitle']!,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeightManager.regular,
+                              color: ColorsManager.grey,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    horizontalSpacing(12),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: ColorsManager.grey,
+                    ),
+                    horizontalSpacing(12),
+                  ],
+                ),
               ),
-            ],
-          ),
-          child: ListTile(
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                news['image']!,
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            ),
-            title: Text(
-              news['title']!,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            subtitle: Text(
-              news['subtitle']!,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            trailing: const Icon(
-              Icons.arrow_forward_ios,
-              size: 16,
-              color: Colors.grey,
-            ),
-            onTap: () {},
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ],
     );
   }
 }
