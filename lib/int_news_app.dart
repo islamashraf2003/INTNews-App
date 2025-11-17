@@ -8,6 +8,7 @@ class IntNewsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'INTnews App',
       initialRoute: Routes.homeScreen,
       onGenerateRoute: AppRouter.generateRoute,
