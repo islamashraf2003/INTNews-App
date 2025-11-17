@@ -7,7 +7,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   HomeCubit(this.homeRepo) : super(HomeState(states: HomeStates.initial));
 
-  Future<void> fetchTopHeadlines({int page = 1, int pageSize = 5}) async {
+  Future<void> fetchTopHeadlines({int page = 1, int pageSize = 6}) async {
     emit(state.copyWith(states: HomeStates.loading));
 
     final result = await homeRepo.fetchChapters(page: page, limit: pageSize);
