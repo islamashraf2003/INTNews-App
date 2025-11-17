@@ -46,7 +46,6 @@ class HomeAppBar extends StatelessWidget {
             ),
             verticalSpacing(20),
             SearchBarWidget(),
-            verticalSpacing(20),
           ],
         ),
       ),
