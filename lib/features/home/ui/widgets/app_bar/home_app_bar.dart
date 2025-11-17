@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:int_news/core/helper/spacing.dart';
+import 'package:int_news/core/theming/styles.dart';
 import 'package:int_news/core/widgets/custom_search_bar_widget.dart';
 import 'package:int_news/features/home/ui/widgets/app_bar/Custom_icon.dart';
 
@@ -33,28 +34,14 @@ class HomeAppBar extends StatelessWidget {
                   children: [
                     CustomIcon(icon: Icons.business),
                     horizontalSpacing(12),
-                    const Text(
-                      "INTnews",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                    Text("INTnews", style: TextStylesManager.font20BlueBold),
                   ],
                 ),
                 CustomIcon(icon: Icons.notifications_none_rounded),
               ],
             ),
             verticalSpacing(25),
-            const Text(
-              "Good morning👋",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text("Good morning👋", style: TextStylesManager.font22BlueBold),
             verticalSpacing(20),
             SearchBarWidget(),
           ],

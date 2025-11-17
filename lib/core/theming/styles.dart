@@ -9,4 +9,15 @@ abstract class TextStylesManager {
     fontSize: 8,
     fontWeight: FontWeightManager.regular,
   );
+  static TextStyle font20BlueBold = TextStyle(
+    color: ColorsManager.white,
+    fontSize: 20,
+    fontWeight: FontWeightManager.bold,
+  );
+
+  static TextStyle font22BlueBold = TextStyle(
+    color: ColorsManager.white,
+    fontSize: 22,
+    fontWeight: FontWeightManager.bold,
+  );
 }
