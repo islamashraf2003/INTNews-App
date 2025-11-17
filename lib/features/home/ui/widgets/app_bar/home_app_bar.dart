@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:int_news/core/helper/extensions.dart';
 import 'package:int_news/core/helper/spacing.dart';
+import 'package:int_news/core/routing/routes.dart';
 import 'package:int_news/core/theming/styles.dart';
 import 'package:int_news/core/widgets/custom_search_bar_widget.dart';
 import 'package:int_news/features/home/ui/widgets/app_bar/Custom_icon.dart';
@@ -36,7 +38,12 @@ class HomeAppBar extends StatelessWidget {
                     Text("INTnews", style: TextStylesManager.font20WhiteBold),
                   ],
                 ),
-                CustomIcon(icon: Icons.notifications_none_rounded),
+                CustomIcon(
+                  icon: Icons.notifications_none_rounded,
+                  onTap: () {
+                    context.pushNamed(Routes.comingSoon);
+                  },
+                ),
               ],
             ),
             verticalSpacing(25),
