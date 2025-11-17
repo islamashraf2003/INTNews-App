@@ -41,7 +41,10 @@ class HomeAppBar extends StatelessWidget {
               ],
             ),
             verticalSpacing(25),
-            Text("Good morning👋", style: TextStylesManager.font22BlueBold),
+            Text(
+              "Hello, stay informed! 📰",
+              style: TextStylesManager.font22BlueBold,
+            ),
             verticalSpacing(20),
             SearchBarWidget(),
           ],
