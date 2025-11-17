@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:int_news/core/helper/spacing.dart';
 import 'package:int_news/core/theming/colors.dart';
 import 'package:int_news/core/theming/font_weight.dart';
+import 'package:int_news/features/home/ui/screens/article_detail_screen.dart';
 import 'package:int_news/features/home/ui/widgets/all_news_list/recommendations_see_all.dart';
 
 class AllNewsList extends StatelessWidget {
@@ -40,8 +41,22 @@ class AllNewsList extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
             final news = allNews[index];
-            return InkWell(
-              onTap: () {},
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ArticleDetailScreen(
+                      title: news['title']!,
+                      subtitle: news['subtitle']!,
+                      image: news['image']!,
+                      author: "INTCORE Team",
+                      publishedAt: "2025-01-18",
+                      url: "https://intcore.com",
+                    ),
+                  ),
+                );
+              },
               child: Container(
                 decoration: BoxDecoration(
                   color: ColorsManager.white,
