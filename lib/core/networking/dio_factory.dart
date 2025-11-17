@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'api_constants.dart';
@@ -11,7 +9,6 @@ class DioFactory {
 
   static Dio getDio() {
     if (_dio == null) {
-      log("🛠️ Initializing Dio");
       _dio = Dio(
         BaseOptions(
           baseUrl: ApiConstants.baseUrl,
@@ -31,7 +28,6 @@ class DioFactory {
   static void setTokenIntoHeaderAfterLogin(String accessToken) {
     if (_dio != null) {
       _dio!.options.headers["Authorization"] = "Bearer $accessToken";
-      log("✅ Authorization header updated after login: Bearer $accessToken");
     }
   }
 

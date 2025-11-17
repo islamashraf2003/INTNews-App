@@ -2,39 +2,35 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:int_news/core/helper/spacing.dart';
 import 'package:int_news/core/theming/colors.dart';
+import 'package:int_news/features/home/data/models/news_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class BreakingNewsSlider extends StatefulWidget {
-  const BreakingNewsSlider({super.key});
+  const BreakingNewsSlider({super.key, required this.newsResponse});
+  final NewsResponse newsResponse;
 
   @override
   State<BreakingNewsSlider> createState() => _BreakingNewsSliderState();
 }
 
 class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
-  final List<Map<String, String>> breakingNews = const [
-    {
-      "title": "INTCORE launches new AI product",
-      "image": "assets/images/news.png",
-    },
-    {
-      "title": "Company reaches 1M users milestone",
-      "image": "assets/images/news.png",
-    },
-    {
-      "title": "New partnership with Tech Giant",
-      "image": "assets/images/news.png",
-    },
-  ];
-
   int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final articles = widget.newsResponse.articles;
+
+    if (articles.isEmpty) {
+      return const SizedBox(
+        height: 220,
+        child: Center(child: Text("No breaking news")),
+      );
+    }
+
     return Column(
       children: [
         CarouselSlider.builder(
-          itemCount: breakingNews.length,
+          itemCount: articles.length,
           options: CarouselOptions(
             height: 220,
             autoPlay: true,
@@ -47,22 +43,25 @@ class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
             },
           ),
           itemBuilder: (context, index, realIndex) {
-            final news = breakingNews[index];
+            final article = articles[index];
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorsManager.black.withOpacity(0.2),
+                    color: Colors.black.withOpacity(0.2),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),
                 ],
-                image: DecorationImage(
-                  image: AssetImage(news['image']!),
-                  fit: BoxFit.cover,
-                ),
+                image: article.urlToImage != null
+                    ? DecorationImage(
+                        image: NetworkImage(article.urlToImage!),
+                        fit: BoxFit.cover,
+                      )
+                    : null,
+                color: Colors.grey.shade300, // fallback color
               ),
               child: Container(
                 decoration: BoxDecoration(
@@ -76,12 +75,12 @@ class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
                 padding: const EdgeInsets.all(12),
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  news['title']!,
+                  article.title,
                   style: TextStyle(
-                    color: ColorsManager.white,
+                    color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    shadows: [
+                    shadows: const [
                       Shadow(
                         color: Colors.black45,
                         blurRadius: 4,
@@ -97,7 +96,7 @@ class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
         verticalSpacing(12),
         AnimatedSmoothIndicator(
           activeIndex: activeIndex,
-          count: breakingNews.length,
+          count: articles.length,
           effect: ExpandingDotsEffect(
             activeDotColor: ColorsManager.primaryColor,
             dotColor: Colors.grey.shade300,
