@@ -13,7 +13,10 @@ class HomeRepo {
     required int limit,
   }) async {
     try {
-      final response = await apiService.fetchTopHeadlines();
+      final response = await apiService.fetchTopHeadlines(
+        page: page,
+        pageSize: limit,
+      );
       return Right(response);
     } catch (error) {
       return Left(ApiErrorHandler.handle(error));
