@@ -8,7 +8,7 @@ class HomeRepo {
   final ApiService apiService;
 
   HomeRepo(this.apiService);
-  Future<Either<ApiErrorModel, NewsResponse>> fetchChapters({
+  Future<Either<ApiErrorModel, NewsResponse>> fetchTopHeadlines({
     required int page,
     required int limit,
   }) async {
@@ -16,6 +16,23 @@ class HomeRepo {
       final response = await apiService.fetchTopHeadlines(
         page: page,
         pageSize: limit,
+      );
+      return Right(response);
+    } catch (error) {
+      return Left(ApiErrorHandler.handle(error));
+    }
+  }
+
+  Future<Either<ApiErrorModel, NewsResponse>> fetchEverything({
+    required String query,
+    int page = 1,
+    int pageSize = 20,
+  }) async {
+    try {
+      final response = await apiService.fetchEverything(
+        query: query,
+        page: page,
+        pageSize: pageSize,
       );
       return Right(response);
     } catch (error) {

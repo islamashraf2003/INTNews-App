@@ -20,4 +20,14 @@ abstract class ApiService {
     @Query("pageSize") int pageSize = 5,
     @Query("apiKey") String apiKey = ApiConstants.apiKey,
   });
+
+  // Fetch Everything (search/query) with pagination
+  @GET(ApiConstants.everything)
+  Future<NewsResponse> fetchEverything({
+    @Query("q") required String query,
+    @Query("language") String language = "en",
+    @Query("page") int page = 1,
+    @Query("pageSize") int pageSize = 20,
+    @Query("apiKey") String apiKey = ApiConstants.apiKey,
+  });
 }
