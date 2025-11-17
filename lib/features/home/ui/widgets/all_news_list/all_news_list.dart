@@ -11,17 +11,17 @@ class AllNewsList extends StatelessWidget {
     {
       "title": "INTCORE announces Q4 results",
       "subtitle": "The company reports a record growth in Q4 2025",
-      "image": "assets/images/news.jpg",
+      "image": "assets/images/news.png",
     },
     {
       "title": "New mobile app released",
       "subtitle": "INTNEWS app now available for employees worldwide",
-      "image": "assets/images/news.jpg",
+      "image": "assets/images/news.png",
     },
     {
       "title": "Office reopening post pandemic",
       "subtitle": "All employees are requested to follow new guidelines",
-      "image": "assets/images/news.jpg",
+      "image": "assets/images/news.png",
     },
   ];
 

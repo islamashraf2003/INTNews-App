@@ -10,10 +10,10 @@ class IntNewsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.lightTheme(context),
       title: 'INTnews App',
-      initialRoute: Routes.homeScreen,
       onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: Routes.homeScreen,
     );
   }
 }

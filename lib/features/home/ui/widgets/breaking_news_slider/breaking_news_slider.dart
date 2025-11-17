@@ -15,15 +15,15 @@ class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
   final List<Map<String, String>> breakingNews = const [
     {
       "title": "INTCORE launches new AI product",
-      "image": "assets/images/news.jpg",
+      "image": "assets/images/news.png",
     },
     {
       "title": "Company reaches 1M users milestone",
-      "image": "assets/images/news.jpg",
+      "image": "assets/images/news.png",
     },
     {
       "title": "New partnership with Tech Giant",
-      "image": "assets/images/news.jpg",
+      "image": "assets/images/news.png",
     },
   ];
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:int_news/core/routing/routes.dart';
 import 'package:int_news/core/widgets/coming_soon.dart';
 import 'package:int_news/features/home/ui/screens/home_screen.dart';
@@ -10,10 +11,8 @@ class AppRouter {
     // final arguments = settings.arguments;
     switch (settings.name) {
       case Routes.homeScreen:
-        return _createPageTransition(
-          child: const HomeScreen(),
-          transitionType: PageTransitionType.fade,
-        );
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
+
       case Routes.comingSoon:
         return _createPageTransition(
           child: const ComingSoon(),
@@ -21,7 +20,7 @@ class AppRouter {
         );
 
       default:
-        return null;
+        return _createPageTransition(child: const HomeScreen());
     }
   }
 
