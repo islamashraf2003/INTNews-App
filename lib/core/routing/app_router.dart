@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:int_news/core/routing/routes.dart';
-import 'package:int_news/features/home/screens/home_screen.dart';
+import 'package:int_news/features/home/ui/screens/home_screen.dart';
 
 class AppRouter {
   static Route? generateRoute(RouteSettings settings) {
