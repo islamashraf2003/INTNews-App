@@ -17,11 +17,13 @@
 ## 📱 iOS Screenshots
 
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/cb0097f5-3765-4348-b3bd-885e7fe69e22" width="200"/>
   <img src="https://github.com/user-attachments/assets/4343a77e-0c8a-44a2-9dd2-be67a35aa9f0" width="200"/>
   <img src="https://github.com/user-attachments/assets/d8e88465-e7d8-457e-9785-e78e744a9203" width="200"/>
   <img src="https://github.com/user-attachments/assets/8c42c277-8f63-457d-b3c4-89eccea219ed" width="200"/>
   <img src="https://github.com/user-attachments/assets/e7f59be8-2156-4bde-9c48-4700fa2c9fc2" width="200"/>
 </p>
+
 
 ---
 
