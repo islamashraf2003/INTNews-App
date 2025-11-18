@@ -8,8 +8,7 @@
 
 - **Top Headlines & Categories**: Browse news by categories like General, Sports, Business, Technology, Health, etc.  
 - **Pagination & Infinite Scroll**: Load more news seamlessly when scrolling.  
-- **Article Details**: View full article, author, date, and image.  
-- **Search**: Fetch news by keyword using the "everything" endpoint.  
+- **Article Details**: View full article, author, date, and image.   
 - **Pull-to-Refresh**: Easily refresh the latest news.  
 - **Clean UI/UX**: Minimalistic, modern design for a smooth reading experience.  
 
