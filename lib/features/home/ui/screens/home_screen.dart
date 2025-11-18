@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:int_news/core/helper/spacing.dart';
+import 'package:int_news/core/theming/colors.dart';
 import 'package:int_news/features/home/logic/cubit/home_cubit.dart';
 import 'package:int_news/features/home/ui/widgets/all_news_list/all_news_list_section.dart';
 import 'package:int_news/features/home/ui/widgets/app_bar/home_app_bar.dart';
@@ -13,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
+        color: ColorsManager.primaryColor,
         onRefresh: () async {
           final cubit = context.read<HomeCubit>();
           await cubit.fetchTopHeadlines(page: 1, pageSize: 6);
