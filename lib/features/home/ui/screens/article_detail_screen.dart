@@ -26,15 +26,20 @@ class ArticleDetailScreen extends StatelessWidget {
       body: Stack(
         children: [
           Hero(
-            tag: image,
-            child: Container(
+            tag: 'article_image_$title',
+            child: SizedBox(
               height: 330,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/splash/splash_below12.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
+              width: double.infinity,
+              child: image.isNotEmpty
+                  ? FadeInImage(
+                      placeholder: AssetImage('assets/images/placeholder.webp'),
+                      image: NetworkImage(image),
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      'assets/images/placeholder.webp',
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           Container(
@@ -47,7 +52,6 @@ class ArticleDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Positioned(
             top: 45,
             left: 16,
@@ -59,7 +63,6 @@ class ArticleDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-
           DraggableScrollableSheet(
             initialChildSize: 0.58,
             minChildSize: 0.58,
@@ -72,8 +75,10 @@ class ArticleDetailScreen extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: ColorsManager.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-                  boxShadow: [
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(32),
+                  ),
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 20,
                       color: Colors.black12,
@@ -97,7 +102,6 @@ class ArticleDetailScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       Text(
                         title,
                         style: const TextStyle(
@@ -114,32 +118,39 @@ class ArticleDetailScreen extends StatelessWidget {
                             size: 18,
                             color: Colors.grey,
                           ),
-                          horizontalSpacing(6),
-                          Text(
-                            author,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade700,
+                          const SizedBox(width: 4),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              author,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey.shade700,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          horizontalSpacing(20),
+                          horizontalSpacing(12),
                           const Icon(
                             Icons.calendar_today,
                             size: 18,
                             color: Colors.grey,
                           ),
-                          horizontalSpacing(6),
-                          Text(
-                            publishedAt,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey.shade700,
+                          const SizedBox(width: 4),
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              publishedAt,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey.shade700,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
                       ),
-
-                      const SizedBox(height: 22),
+                      verticalSpacing(22),
                       Text(
                         subtitle,
                         style: TextStyle(

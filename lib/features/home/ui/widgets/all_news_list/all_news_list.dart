@@ -1,58 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:int_news/core/helper/spacing.dart';
 import 'package:int_news/core/theming/colors.dart';
-import 'package:int_news/core/theming/font_weight.dart';
+import 'package:int_news/core/theming/styles.dart';
+import 'package:int_news/features/home/data/models/news_model.dart';
 import 'package:int_news/features/home/ui/screens/article_detail_screen.dart';
 import 'package:int_news/features/home/ui/widgets/all_news_list/recommendations_see_all.dart';
 
 class AllNewsList extends StatelessWidget {
-  const AllNewsList({super.key});
-
-  final List<Map<String, String>> allNews = const [
-    {
-      "title": "INTCORE announces Q4 results",
-      "subtitle": "The company reports a record growth in Q4 2025",
-      "image": "assets/images/news.png",
-    },
-    {
-      "title": "New mobile app released",
-      "subtitle": "INTNEWS app now available for employees worldwide",
-      "image": "assets/images/news.png",
-    },
-    {
-      "title": "Office reopening post pandemic",
-      "subtitle": "All employees are requested to follow new guidelines",
-      "image": "assets/images/news.png",
-    },
-  ];
+  const AllNewsList({super.key, required this.newsResponse});
+  final NewsResponse newsResponse;
 
   @override
   Widget build(BuildContext context) {
+    final articles = newsResponse.articles;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RecommendationsSeeAll(),
+        const RecommendationsSeeAll(),
         verticalSpacing(16),
         ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: allNews.length,
+          itemCount: articles.length,
           separatorBuilder: (context, index) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
-            final news = allNews[index];
+            final article = articles[index];
             return GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => ArticleDetailScreen(
-                      title: news['title']!,
-                      subtitle: news['subtitle']!,
-                      image: news['image']!,
-                      author: "INTCORE Team",
-                      publishedAt: "2025-01-18",
-                      url: "https://intcore.com",
+                      title: article.title,
+                      subtitle: article.description ?? "",
+                      image: article.urlToImage ?? "",
+                      author: article.author ?? "N/A",
+                      publishedAt: article.publishedAt,
+                      url: article.url,
                     ),
                   ),
                 );
@@ -79,10 +65,13 @@ class AllNewsList extends StatelessWidget {
                           topLeft: Radius.circular(16),
                           bottomLeft: Radius.circular(16),
                         ),
-                        image: DecorationImage(
-                          image: AssetImage(news['image']!),
-                          fit: BoxFit.cover,
-                        ),
+                        image: article.urlToImage != null
+                            ? DecorationImage(
+                                image: NetworkImage(article.urlToImage!),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                        color: Colors.grey.shade300,
                       ),
                     ),
                     horizontalSpacing(16),
@@ -90,25 +79,21 @@ class AllNewsList extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          verticalSpacing(10),
                           Text(
-                            news['title']!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeightManager.bold,
-                              color: ColorsManager.black,
-                            ),
+                            article.title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStylesManager.font16BlackBold,
                           ),
                           verticalSpacing(6),
                           Text(
-                            news['subtitle']!,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeightManager.regular,
-                              color: ColorsManager.grey,
-                            ),
+                            article.description ?? "",
+                            style: TextStylesManager.font14GreykRegular,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
+                          verticalSpacing(10),
                         ],
                       ),
                     ),

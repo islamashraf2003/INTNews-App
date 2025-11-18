@@ -19,7 +19,7 @@ class BreakingNewsSection extends StatelessWidget {
       },
       builder: (context, state) {
         if (state.isLoaded) {
-          return BreakingNewsSlider(newsResponse: state.response!);
+          return BreakingNewsSlider(newsResponse: state.topHeadlines!);
         } else {
           return BreakingNewsSliderLoading();
         }

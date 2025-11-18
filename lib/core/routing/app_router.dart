@@ -16,7 +16,9 @@ class AppRouter {
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<HomeCubit>(
-            create: (context) => getIt<HomeCubit>()..fetchTopHeadlines(),
+            create: (context) => getIt<HomeCubit>()
+              ..fetchTopHeadlines()
+              ..fetchEverything(query: 'general'),
             child: const HomeScreen(),
           ),
         );

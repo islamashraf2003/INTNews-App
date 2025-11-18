@@ -12,26 +12,35 @@ extension HomeStateX on HomeState {
 
 class HomeState {
   final HomeStates states;
-  final NewsResponse? response;
+  final NewsResponse? topHeadlines;
+  final NewsResponse? everythingNews;
   final ApiErrorModel? apiErrorModel;
 
-  HomeState({required this.states, this.response, this.apiErrorModel});
+  HomeState({
+    required this.states,
+    this.topHeadlines,
+    this.everythingNews,
+    this.apiErrorModel,
+  });
 
   HomeState copyWith({
     HomeStates? states,
-    NewsResponse? response,
+    NewsResponse? topHeadlines,
+    NewsResponse? everythingNews,
     ApiErrorModel? apiErrorModel,
   }) {
     return HomeState(
       states: states ?? this.states,
-      response: response ?? this.response,
+      topHeadlines: topHeadlines ?? this.topHeadlines,
+      everythingNews: everythingNews ?? this.everythingNews,
       apiErrorModel: apiErrorModel ?? this.apiErrorModel,
     );
   }
 
   @override
-  String toString() =>
-      'HomeState(states: $states, response: $response, apiErrorModel: $apiErrorModel)';
+  String toString() {
+    return 'HomeState(states: $states, topHeadlines: $topHeadlines, everythingNews: $everythingNews, apiErrorModel: $apiErrorModel)';
+  }
 
   @override
   bool operator ==(Object other) {
@@ -39,11 +48,16 @@ class HomeState {
 
     return other is HomeState &&
         other.states == states &&
-        other.response == response &&
+        other.topHeadlines == topHeadlines &&
+        other.everythingNews == everythingNews &&
         other.apiErrorModel == apiErrorModel;
   }
 
   @override
-  int get hashCode =>
-      states.hashCode ^ response.hashCode ^ apiErrorModel.hashCode;
+  int get hashCode {
+    return states.hashCode ^
+        topHeadlines.hashCode ^
+        everythingNews.hashCode ^
+        apiErrorModel.hashCode;
+  }
 }

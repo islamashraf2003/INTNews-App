@@ -26,4 +26,15 @@ abstract class TextStylesManager {
     fontSize: 18,
     fontWeight: FontWeightManager.semiBold,
   );
+  static TextStyle font16BlackBold = TextStyle(
+    color: ColorsManager.black,
+    fontSize: 16,
+    fontWeight: FontWeightManager.bold,
+  );
+
+  static TextStyle font14GreykRegular = TextStyle(
+    color: ColorsManager.grey,
+    fontSize: 14,
+    fontWeight: FontWeightManager.regular,
+  );
 }
