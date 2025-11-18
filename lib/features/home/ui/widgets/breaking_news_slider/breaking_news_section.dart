@@ -18,10 +18,10 @@ class BreakingNewsSection extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state.isLoaded) {
+        if (state.isLoaded && state.topHeadlines != null) {
           return BreakingNewsSlider(newsResponse: state.topHeadlines!);
         } else {
-          return BreakingNewsSliderLoading();
+          return const BreakingNewsSliderLoading();
         }
       },
     );

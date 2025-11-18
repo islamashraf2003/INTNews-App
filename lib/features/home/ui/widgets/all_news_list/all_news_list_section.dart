@@ -18,7 +18,7 @@ class AllNewsListSection extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state.isLoaded) {
+        if (state.isLoaded && state.everythingNews != null) {
           return AllNewsList(newsResponse: state.everythingNews!);
         } else {
           return AllNewsListLoading();

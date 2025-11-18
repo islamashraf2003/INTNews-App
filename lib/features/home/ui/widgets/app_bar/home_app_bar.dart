@@ -41,7 +41,7 @@ class HomeAppBar extends StatelessWidget {
                 CustomIcon(
                   icon: Icons.notifications_none_rounded,
                   onTap: () {
-                    context.pushNamed(Routes.comingSoon);
+                    context.pushNamed(Routes.comingSoonScreen);
                   },
                 ),
               ],

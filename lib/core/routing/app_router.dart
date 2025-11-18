@@ -8,10 +8,11 @@ import 'package:int_news/core/routing/routes.dart';
 import 'package:int_news/core/widgets/coming_soon.dart';
 import 'package:int_news/features/home/logic/cubit/home_cubit.dart';
 import 'package:int_news/features/home/ui/screens/home_screen.dart';
+import 'package:int_news/features/home/ui/screens/see_all_screen.dart';
 
 class AppRouter {
   static Route? generateRoute(RouteSettings settings) {
-    // final arguments = settings.arguments;
+    //final arguments = settings.arguments;
     switch (settings.name) {
       case Routes.homeScreen:
         return MaterialPageRoute(
@@ -23,10 +24,15 @@ class AppRouter {
           ),
         );
 
-      case Routes.comingSoon:
+      case Routes.comingSoonScreen:
         return _createPageTransition(
           child: const ComingSoon(),
           transitionType: PageTransitionType.fade,
+        );
+      case Routes.seeAllScreen:
+        return _createPageTransition(
+          child: SeeAllScreen(),
+          transitionType: PageTransitionType.scale,
         );
 
       default:
