@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:int_news/features/home/data/models/news_model.dart';
 import 'package:int_news/features/home/data/repo/home_repo.dart';
 import 'package:int_news/features/home/logic/cubit/home_state.dart';
 
@@ -32,17 +33,22 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  /// Fetch everything endpoint
+  int everythingPage = 1;
+  final int pageSize = 10;
+
+  /// Fetch everything endpoint with pagination
   Future<void> fetchEverything({
     required String query,
-    int page = 1,
-    int pageSize = 8,
+    bool loadMore = false,
   }) async {
-    emit(state.copyWith(states: HomeStates.loading));
+    if (!loadMore) {
+      everythingPage = 1;
+      emit(state.copyWith(states: HomeStates.loading, everythingNews: null));
+    }
 
     final result = await homeRepo.fetchEverything(
       query: query,
-      page: page,
+      page: everythingPage,
       pageSize: pageSize,
     );
 
@@ -51,13 +57,30 @@ class HomeCubit extends Cubit<HomeState> {
         emit(state.copyWith(states: HomeStates.error, apiErrorModel: error));
       },
       (newsResponse) {
+        List<Article> updatedArticles = [];
+
+        if (loadMore && state.everythingNews != null) {
+          updatedArticles = [
+            ...state.everythingNews!.articles,
+            ...newsResponse.articles,
+          ];
+        } else {
+          updatedArticles = newsResponse.articles;
+        }
+
         emit(
           state.copyWith(
             states: HomeStates.loaded,
-            everythingNews: newsResponse,
+            everythingNews: NewsResponse(
+              status: newsResponse.status,
+              totalResults: newsResponse.totalResults,
+              articles: updatedArticles,
+            ),
             apiErrorModel: null,
           ),
         );
+
+        everythingPage++;
       },
     );
   }
