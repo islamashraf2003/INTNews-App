@@ -14,7 +14,10 @@ class BreakingNewsSection extends StatelessWidget {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
         if (state.isError) {
-          showSnackBar(context, 'There was an error');
+          showSnackBar(
+            context,
+            state.apiErrorModel!.message ?? 'There was an error',
+          );
         }
       },
       builder: (context, state) {
