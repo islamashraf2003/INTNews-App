@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:int_news/core/helper/spacing.dart';
 import 'package:int_news/core/theming/colors.dart';
 
@@ -26,6 +28,90 @@ class ArticleDetailScreen extends StatelessWidget {
     if (!await launchUrl(uri)) {
       throw Exception('Could not launch $uri');
     }
+  }
+
+  Future<void> _shareArticle(BuildContext context) async {
+    try {
+      await Share.share(
+        '$title\n\n$subtitle\n\nRead more: $url',
+        subject: 'Check out this article: $title',
+      );
+    } catch (e) {
+      _showShareFallback(context);
+    }
+  }
+
+  void _showShareFallback(BuildContext context) {
+    Clipboard.setData(
+      ClipboardData(text: '$title\n\n$subtitle\n\nRead more: $url'),
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  color: ColorsManager.primaryColor.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.check_circle,
+                  color: ColorsManager.primaryColor,
+                  size: 32,
+                ),
+              ),
+              verticalSpacing(20),
+              Text(
+                'Article Shared!',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.grey.shade900,
+                ),
+              ),
+              verticalSpacing(12),
+              Text(
+                'The article link has been copied to your clipboard. You can now paste it in any app to share with others.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  height: 1.4,
+                  color: Colors.grey.shade700,
+                ),
+              ),
+              verticalSpacing(24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorsManager.primaryColor,
+                    foregroundColor: ColorsManager.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: const Text(
+                    'Got it',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -68,6 +154,17 @@ class ArticleDetailScreen extends StatelessWidget {
               child: IconButton(
                 icon: Icon(Icons.arrow_back, color: ColorsManager.white),
                 onPressed: () => Navigator.pop(context),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 45,
+            right: 16,
+            child: CircleAvatar(
+              backgroundColor: ColorsManager.primaryColor,
+              child: IconButton(
+                icon: Icon(Icons.share, color: ColorsManager.white),
+                onPressed: () => _shareArticle(context),
               ),
             ),
           ),
@@ -168,33 +265,30 @@ class ArticleDetailScreen extends StatelessWidget {
                         ),
                       ),
                       verticalSpacing(30),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: _launchUrl,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorsManager.primaryColor,
-                            foregroundColor: ColorsManager.white,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            elevation: 2,
+                      ElevatedButton(
+                        onPressed: _launchUrl,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorsManager.primaryColor,
+                          foregroundColor: ColorsManager.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.article, size: 20),
-                              SizedBox(width: 8),
-                              Text(
-                                'Read Full Article',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                          elevation: 2,
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.article, size: 20),
+                            SizedBox(width: 8),
+                            Text(
+                              'Read Full',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       verticalSpacing(20),
