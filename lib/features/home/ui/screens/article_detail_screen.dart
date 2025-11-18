@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:int_news/core/helper/spacing.dart';
 import 'package:int_news/core/theming/colors.dart';
 
@@ -19,6 +20,13 @@ class ArticleDetailScreen extends StatelessWidget {
     required this.publishedAt,
     required this.url,
   });
+
+  Future<void> _launchUrl() async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $uri');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,6 +168,36 @@ class ArticleDetailScreen extends StatelessWidget {
                         ),
                       ),
                       verticalSpacing(30),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: _launchUrl,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorsManager.primaryColor,
+                            foregroundColor: ColorsManager.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 2,
+                          ),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.article, size: 20),
+                              SizedBox(width: 8),
+                              Text(
+                                'Read Full Article',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      verticalSpacing(20),
                     ],
                   ),
                 ),
