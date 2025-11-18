@@ -37,4 +37,10 @@ abstract class TextStylesManager {
     fontSize: 14,
     fontWeight: FontWeightManager.regular,
   );
+
+  static TextStyle font14WhiteBold = TextStyle(
+    color: ColorsManager.white,
+    fontSize: 14,
+    fontWeight: FontWeightManager.bold,
+  );
 }
