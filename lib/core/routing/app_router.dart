@@ -22,7 +22,7 @@ class AppRouter {
       case Routes.seeAllScreen:
         return _createPageTransition(
           child: SeeAllScreen(),
-          transitionType: PageTransitionType.scale,
+          transitionType: PageTransitionType.slide,
         );
 
       default:
