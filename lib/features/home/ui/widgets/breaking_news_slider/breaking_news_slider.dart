@@ -61,7 +61,7 @@ class _BreakingNewsSliderState extends State<BreakingNewsSlider> {
                         fit: BoxFit.cover,
                       )
                     : null,
-                color: Colors.grey.shade300, // fallback color
+                color: Colors.grey.shade300,
               ),
               child: Container(
                 decoration: BoxDecoration(
