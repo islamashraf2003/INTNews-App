@@ -2,11 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:int_news/core/di/dependency_injection.dart';
 import 'package:int_news/core/routing/routes.dart';
 import 'package:int_news/core/widgets/coming_soon.dart';
-import 'package:int_news/features/home/logic/cubit/home_cubit.dart';
 import 'package:int_news/features/home/ui/screens/home_screen.dart';
 import 'package:int_news/features/home/ui/screens/see_all_screen.dart';
 
@@ -15,14 +12,7 @@ class AppRouter {
     //final arguments = settings.arguments;
     switch (settings.name) {
       case Routes.homeScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider<HomeCubit>(
-            create: (context) => getIt<HomeCubit>()
-              ..fetchTopHeadlines()
-              ..fetchEverything(query: 'general'),
-            child: const HomeScreen(),
-          ),
-        );
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case Routes.comingSoonScreen:
         return _createPageTransition(
