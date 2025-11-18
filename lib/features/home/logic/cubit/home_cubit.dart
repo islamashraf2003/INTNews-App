@@ -38,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   /// Fetch everything endpoint with pagination
   Future<void> fetchEverything({
-    required String query,
+    String query = 'general',
     bool loadMore = false,
   }) async {
     if (!loadMore) {

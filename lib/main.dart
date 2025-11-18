@@ -16,7 +16,7 @@ void main() async {
     BlocProvider(
       create: (context) => getIt<HomeCubit>()
         ..fetchTopHeadlines()
-        ..fetchEverything(query: 'general'),
+        ..fetchEverything(),
       child: const IntNewsApp(),
     ),
   );
