@@ -9,6 +9,9 @@ environment:
 dependencies:
   carousel_slider: ^5.1.1
   cupertino_icons: ^1.0.8
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  path_provider: ^2.1.1
   dartz: ^0.10.1
   dio: ^5.9.0
   flutter:
@@ -26,12 +29,13 @@ dependencies:
   url_launcher: ^6.1.10
 
 dev_dependencies:
-  build_runner: 2.10.3
+  hive_generator: null
+  build_runner: null
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
   json_serializable: ^6.6.2
-  retrofit_generator: 10.0.6
+  retrofit_generator: null
 
 flutter_launcher_icons:
   android: true
