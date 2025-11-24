@@ -7,6 +7,7 @@ class HiveManager {
     Hive.registerAdapter(SourceAdapter());
     Hive.registerAdapter(ArticleAdapter());
     Hive.registerAdapter(NewsResponseAdapter());
+    await Hive.openBox('newsBox');
   }
 
   static Box get newsBox => Hive.box('newsBox');
