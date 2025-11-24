@@ -4,5 +4,5 @@ class ApiConstants {
   static const String everything = "v2/everything";
   static const String sources = "v2/sources";
 
-  static const String apiKey = "c0e4f1021ef04fd094d5d0903c01f966";
+  static const String apiKey = "7fa479042bff4f4daba79197bdfe2003";
 }
